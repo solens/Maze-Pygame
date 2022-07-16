@@ -11,7 +11,7 @@ pygame.font.init()
 
 WIDTH = 820
 HEIGHT = 820
-FPS = 30
+FPS = 20
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Maze")
@@ -198,19 +198,32 @@ def main():
                 run = False
                 pygame.quit()
 
-            if event.type == pygame.KEYDOWN:
+            # if event.type == pygame.KEYDOWN:
+            #
+            #     if event.key == pygame.K_UP and cur_tile.top:
+            #         player, cur_tile = move_player(player,cur_tile,cur_tile.top,step)
+            #
+            #     if event.key == pygame.K_DOWN and cur_tile.bottom:
+            #         player, cur_tile = move_player(player,cur_tile,cur_tile.bottom,step)
+            #
+            #     if event.key == pygame.K_LEFT and cur_tile.left:
+            #         player, cur_tile = move_player(player,cur_tile,cur_tile.left,step)
+            #
+            #     if event.key == pygame.K_RIGHT and cur_tile.right:
+            #         player, cur_tile = move_player(player,cur_tile,cur_tile.right,step)
 
-                if event.key == pygame.K_UP and cur_tile.top:
-                    player, cur_tile = move_player(player,cur_tile,cur_tile.top,step)
+        keys_pressed = pygame.key.get_pressed()
+        if keys_pressed[pygame.K_UP] and cur_tile.top:
+            player, cur_tile = move_player(player, cur_tile, cur_tile.top, step)
 
-                if event.key == pygame.K_DOWN and cur_tile.bottom:
-                    player, cur_tile = move_player(player,cur_tile,cur_tile.bottom,step)
+        if keys_pressed[pygame.K_DOWN] and cur_tile.bottom:
+            player, cur_tile = move_player(player, cur_tile, cur_tile.bottom, step)
 
-                if event.key == pygame.K_LEFT and cur_tile.left:
-                    player, cur_tile = move_player(player,cur_tile,cur_tile.left,step)
+        if keys_pressed[pygame.K_LEFT] and cur_tile.left:
+            player, cur_tile = move_player(player, cur_tile, cur_tile.left, step)
 
-                if event.key == pygame.K_RIGHT and cur_tile.right:
-                    player, cur_tile = move_player(player,cur_tile,cur_tile.right,step)
+        if keys_pressed[pygame.K_RIGHT] and cur_tile.right:
+            player, cur_tile = move_player(player, cur_tile, cur_tile.right, step)
 
         if cur_tile == tiles[-1]:
             draw_winner()
