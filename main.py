@@ -100,25 +100,28 @@ def build_maze(tiles, step):
 
     while len(stack) > 0:
         cell = []
+        # Add complexity:
+        #   - add small chance to revisit a cell
+        revisit = random.random() > 0.95
 
         # is TOP available?
         top_cell = find_tile(tiles, step,cur_cell.x, cur_cell.y - step)
-        if top_cell and top_cell not in visited:
+        if top_cell and (top_cell not in visited or revisit):
             cell.append("top")
 
         # is BOTTOM available?
         bottom_cell = find_tile(tiles, step, cur_cell.x, cur_cell.y + step)
-        if bottom_cell and bottom_cell not in visited:
+        if bottom_cell and (bottom_cell not in visited or revisit):
             cell.append("bottom")
 
         # is RIGHT available?
         right_cell = find_tile(tiles, step, cur_cell.x + step, cur_cell.y)
-        if right_cell and right_cell not in visited:
+        if right_cell and (right_cell not in visited or revisit):
             cell.append("right")
 
         # is LEFT available?
         left_cell = find_tile(tiles, step, cur_cell.x - step, cur_cell.y)
-        if left_cell and left_cell not in visited:
+        if left_cell and (left_cell not in visited or revisit):
             cell.append("left")
 
         if len(cell) > 0:
