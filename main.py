@@ -11,7 +11,7 @@ pygame.font.init()
 
 WIDTH = 820
 HEIGHT = 820
-FPS = 20
+FPS = 10
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Maze")
@@ -21,6 +21,8 @@ WALL_SIZE = 1
 
 MAZE_WIDTH = 25
 MAZE_HEIGHT = 25
+
+tracker = True
 
 
 ## COLORMAP
@@ -167,6 +169,13 @@ def move_player(player, cur_tile, next_tile, s):
 
     # draw_player
     pygame.draw.rect(WIN, ACCENT_COL, player)
+
+    # track path
+    if tracker:
+        tracker_ind = pygame.Rect(cur_tile.x + BORDER + WALL_SIZE + (s/2 -2),
+                                  cur_tile.y + BORDER + WALL_SIZE + (s/2 -2),
+                                  4, 4)
+        pygame.draw.rect(WIN, NEUTRAL_COL, tracker_ind)
 
     # update image
     pygame.display.update()
